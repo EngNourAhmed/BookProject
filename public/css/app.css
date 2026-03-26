@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+    /* SaaS Design System - Premium Navy & Canary Yellow */
+    --primary-navy: #040d1a;
+    --navy-light: #0d1e36;
+    --navy-dark: #020710;
+    --accent-yellow: #FFD60A;
+    --accent-hover: #FFC300;
+
+    /* Semantic Tokens */
+    --clr-bg-main: var(--primary-navy);
+    --clr-bg-card: var(--navy-light);
+    --clr-sidebar-bg: var(--navy-dark);
+    --clr-border: rgba(255, 255, 255, 0.08);
+
+    /* Text Colors */
+    --text-main: var(--text-white);
+    --text-muted: #94a3b8;
+    --text-white: #ffffff;
+
+    /* Layout Tokens */
+    --sidebar-width: 280px;
+    --sidebar-collapsed: 80px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+
+    /* Shadows - Soft SaaS Depth */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-premium: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+
+    /* Transitions */
+    --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--primary-navy);
+    background-image: radial-gradient(circle at top right, rgba(13, 30, 54, 0.5) 0%, var(--primary-navy) 40%, var(--navy-dark) 100%);
+    background-attachment: fixed;
+    color: var(--text-main);
+    font-family: 'Inter', 'Cairo', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.premium-card {
+    background: var(--clr-bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--clr-border);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-smooth);
+}
+
+.premium-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
