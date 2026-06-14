@@ -7,6 +7,8 @@
     <title>Register - Book ERA</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -67,7 +69,7 @@
 
         .login-container {
             width: 100%;
-            max-width: 500px;
+            max-width: 420px;
             z-index: 10;
         }
 
@@ -87,7 +89,7 @@
         }
 
         .login-header {
-            padding: 40px 40px 10px;
+            padding: 30px 30px 10px;
             text-align: center;
         }
 
@@ -119,7 +121,7 @@
         }
 
         .login-body {
-            padding: 20px 40px 40px;
+            padding: 15px 30px 30px;
         }
 
         .form-label {
@@ -147,6 +149,16 @@
             color: var(--text-white) !important;
             font-size: 0.9rem !important;
             transition: all 0.3s ease !important;
+        }
+
+        /* Autofill Styling */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 1000px rgba(2, 7, 16, 0.65) inset !important;
+            -webkit-text-fill-color: var(--text-white) !important;
+            transition: background-color 5000s ease-in-out 0s;
         }
 
         .form-select {
@@ -284,6 +296,27 @@
         }
 
         .login-card { animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        @media (max-width: 576px) {
+            body {
+                padding: 20px 10px;
+            }
+            .login-header {
+                padding: 30px 20px 10px;
+            }
+            .login-body {
+                padding: 10px 20px 30px;
+            }
+            .login-card {
+                border-radius: 20px;
+            }
+            .role-selector {
+                gap: 8px;
+            }
+            .role-card {
+                padding: 10px 6px;
+            }
+        }
     </style>
 </head>
 

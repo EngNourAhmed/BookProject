@@ -113,7 +113,7 @@
                                 <td>
                                     @if($report->article)
                                     <a href="{{ route('articles.show', $report->article_id) }}" class="text-primary">
-                                        {{ $report->article->title }}
+                                        {{ Str::limit($report->article->title, 40) }}
                                     </a>
                                     @else
                                     <span class="text-muted">Article deleted</span>

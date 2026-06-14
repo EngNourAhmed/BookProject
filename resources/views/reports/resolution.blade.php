@@ -46,7 +46,7 @@
             padding: 1rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2;
         }
         .report-item:hover {
             background: rgba(255, 255, 255, 0.03);
@@ -76,13 +76,49 @@
         }
         .custom-scrollbar::-webkit-scrollbar { width: 5px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
+
+        @media (max-width: 992px) {
+            .report-list-panel {
+                width: 100% !important;
+                display: flex !important;
+            }
+            .chat-panel {
+                display: none !important;
+                width: 100% !important;
+            }
+            .context-panel {
+                display: none !important;
+                width: 100% !important;
+            }
+            
+            /* If show-chat class is active */
+            .show-chat .report-list-panel {
+                display: none !important;
+            }
+            .show-chat .chat-panel {
+                display: flex !important;
+            }
+            
+            /* If show-context class is active */
+            .show-context .chat-panel {
+                display: none !important;
+            }
+            .show-context .context-panel {
+                display: flex !important;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Mobile Toggle -->
+    <button class="mobile-toggle" id="mobileToggle">
+        <i class="bi bi-list"></i>
+    </button>
+
     @include('partials.sidebar')
 
     <div class="main-content p-0" id="mainContent">
-        <div class="resolution-wrapper">
+        <div class="resolution-wrapper {{ $activeReport ? 'show-chat' : '' }}">
             <!-- Left: Report List -->
             <div class="report-list-panel">
                 <div class="p-3 border-bottom border-white-5">
@@ -108,14 +144,22 @@
             <!-- Middle: Chat Area -->
             <div class="chat-panel">
                 @if($activeReport)
-                    <div class="p-3 border-bottom border-white-5 bg-white-5 d-flex align-items-center gap-3">
-                        <div class="avatar-sm" style="width: 40px; height: 40px; background: rgba(255, 214, 10, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid var(--accent-yellow);">
-                            <i class="bi bi-person text-accent"></i>
+                    <div class="p-3 border-bottom border-white-5 bg-white-5 d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-3">
+                            <a href="{{ route('reports.resolution') }}" class="btn btn-sm text-accent d-lg-none me-1 p-0">
+                                <i class="bi bi-chevron-left fs-4"></i>
+                            </a>
+                            <div class="avatar-sm" style="width: 40px; height: 40px; background: rgba(255, 214, 10, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid var(--accent-yellow);">
+                                <i class="bi bi-person text-accent"></i>
+                            </div>
+                            <div>
+                                <h6 class="text-white fw-bold mb-0">Chatting with {{ $activeReport->reported->name }}</h6>
+                                <small class="text-accent x-small">Topic: Reported Article</small>
+                            </div>
                         </div>
-                        <div>
-                            <h6 class="text-white fw-bold mb-0">Chatting with {{ $activeReport->reported->name }}</h6>
-                            <small class="text-accent x-small">Topic: Reported Article</small>
-                        </div>
+                        <button onclick="showDetails()" class="btn btn-sm btn-glass d-lg-none py-1 px-3">
+                            <i class="bi bi-info-circle me-1"></i> Details
+                        </button>
                     </div>
 
                     <div id="messageBox" class="flex-grow-1 p-4 overflow-y-auto d-flex flex-column gap-2 custom-scrollbar">
@@ -141,6 +185,11 @@
             <!-- Right: Context Panel -->
             @if($activeReport)
             <div class="context-panel">
+                <div class="d-flex align-items-center gap-2 mb-4 d-lg-none">
+                    <button onclick="showChat()" class="btn btn-sm btn-glass py-1 px-3">
+                        <i class="bi bi-chevron-left me-1"></i> Back to Chat
+                    </button>
+                </div>
                 <h6 class="text-accent fw-bold text-uppercase small mb-4">Report Details</h6>
                 
                 <div class="mb-4">
@@ -189,6 +238,7 @@
 
     <!-- JS REUSE FROM MESSAGES -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('js/dashboard.js') }}"></script>
     <script>
         @if($activeReport && $activeConversation)
             const conversationId = {{ $activeConversation->id }};
@@ -255,6 +305,22 @@
             // Poll for new messages every 5 seconds
             setInterval(loadChat, 5000);
         @endif
+
+        function showDetails() {
+            const wrapper = document.querySelector('.resolution-wrapper');
+            if (wrapper) {
+                wrapper.classList.remove('show-chat');
+                wrapper.classList.add('show-context');
+            }
+        }
+
+        function showChat() {
+            const wrapper = document.querySelector('.resolution-wrapper');
+            if (wrapper) {
+                wrapper.classList.remove('show-context');
+                wrapper.classList.add('show-chat');
+            }
+        }
     </script>
 </body>
 </html>

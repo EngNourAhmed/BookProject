@@ -81,7 +81,7 @@
     <div class="main-content p-0" id="mainContent" style="height: 100vh;">
         <div class="row g-0 h-100">
             <!-- Inbox Sidebar -->
-            <div class="{{ request()->has('support') ? 'd-none' : 'col-md-4 col-lg-3 d-flex' }} flex-column border-end border-white-5 bg-white-5" style="height: 100vh;">
+            <div class="{{ request()->has('support') ? 'd-none' : 'col-12 col-md-4 col-lg-3 d-flex messenger-inbox-pane' }} flex-column border-end border-white-5 bg-white-5" style="height: 100vh;">
                 <div class="p-4 border-bottom border-white-5">
                     <h4 class="text-white fw-bold mb-3">Messages</h4>
                     <div class="search-box">
@@ -116,10 +116,14 @@
             </div>
 
             <!-- Active Chat Area -->
-            <div class="{{ request()->has('support') ? 'col-12' : 'col-md-8 col-lg-9' }} d-flex flex-column bg-navy" style="height: 100vh;">
+            <div class="{{ request()->has('support') ? 'col-12' : 'col-12 col-md-8 col-lg-9' }} d-flex flex-column bg-navy messenger-chat-pane" style="height: 100vh;">
                 <div id="chatHeader" class="p-3 border-bottom border-white-5 d-none">
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center gap-3">
+                            <!-- Back button for mobile view -->
+                            <button class="btn btn-sm text-accent d-md-none me-2 p-0" id="backToInboxBtn" onclick="backToInbox()" style="background: transparent; border: none;">
+                                <i class="bi bi-chevron-left fs-4"></i>
+                            </button>
                             <div class="avatar-sm" style="width: 40px; height: 40px; background: rgba(255, 214, 10, 0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 214, 10, 0.2);">
                                 <i class="bi bi-person text-accent"></i>
                             </div>
@@ -174,6 +178,9 @@
             document.getElementById('messageFormArea').classList.remove('d-none');
             document.getElementById('noChatSelected').classList.add('d-none');
 
+            // Toggle active layout class on mobile
+            document.getElementById('mainContent').classList.add('show-chat');
+
             fetch(`/messages/${id}`)
                 .then(res => res.json())
                 .then(data => {
@@ -191,6 +198,10 @@
                     
                     scrollToBottom();
                 });
+        }
+
+        function backToInbox() {
+            document.getElementById('mainContent').classList.remove('show-chat');
         }
 
         function appendMessage(msg, authId) {

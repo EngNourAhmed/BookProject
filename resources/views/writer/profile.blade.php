@@ -108,18 +108,18 @@
                 </div>
 
                 @if(auth()->id() !== $user->id)
-                <div class="mb-5">
-                    <button class="btn {{ auth()->user()->isFollowing($user->id) ? 'btn-accent text-navy' : 'btn-outline-accent text-white' }} fw-bold rounded-pill px-5 py-3 follow-btn shadow-lg" data-id="{{ $user->id }}" style="border-width: 2px; font-size: 1.1rem;">
+                <div class="mb-5 d-flex flex-wrap justify-content-center gap-3">
+                    <button class="btn {{ auth()->user()->isFollowing($user->id) ? 'btn-accent text-navy' : 'btn-outline-accent text-white' }} fw-bold rounded-pill px-4 py-3 follow-btn shadow-lg" data-id="{{ $user->id }}" style="border-width: 2px; font-size: 1rem; margin: 0;">
                         <i class="bi {{ auth()->user()->isFollowing($user->id) ? 'bi-check-circle-fill' : 'bi-plus-lg' }} me-2"></i>
                         {{ auth()->user()->isFollowing($user->id) ? 'Following' : 'Follow Writer' }}
                     </button>
-                    <a href="{{ route('messages.index', ['user_id' => $user->id]) }}" class="btn btn-outline-white rounded-pill px-4 py-3 ms-3" style="font-size: 1.1rem;">
+                    <a href="{{ route('messages.index', ['user_id' => $user->id]) }}" class="btn btn-outline-white rounded-pill px-4 py-3" style="font-size: 1rem; margin: 0;">
                         <i class="bi bi-chat-dots me-2"></i> Message
                     </a>
                 </div>
                 @else
-                <div class="mb-5">
-                    <button class="btn btn-outline-accent rounded-pill px-4 py-3 fw-bold" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                <div class="mb-5 d-flex flex-wrap justify-content-center gap-3">
+                    <button class="btn btn-outline-accent rounded-pill px-4 py-3 fw-bold" data-bs-toggle="modal" data-bs-target="#editProfileModal" style="font-size: 1rem; margin: 0;">
                         <i class="bi bi-pencil-square me-2"></i> Edit Profile
                     </button>
                 </div>

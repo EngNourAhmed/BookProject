@@ -3,28 +3,46 @@ document.addEventListener("DOMContentLoaded", function () {
     const mobileToggle = document.getElementById("mobileToggle");
     const mainContent = document.querySelector(".main-content");
     
-    // تبديل حالة السايدبار (مطوي/ممتد)
-    // Sidebar resize/collapse logic removed per user request for a static 280px sidebar.
+    // Create and append sidebar overlay if it doesn't exist
+    let overlay = document.querySelector(".sidebar-overlay");
+    if (!overlay) {
+        overlay = document.createElement("div");
+        overlay.className = "sidebar-overlay";
+        document.body.appendChild(overlay);
+    }
 
     // فتح/إغلاق السايدبار في الشاشات الصغيرة
-    mobileToggle.addEventListener("click", function () {
-        sidebar.classList.toggle("mobile-open");
-    });
+    if (mobileToggle && sidebar) {
+        mobileToggle.addEventListener("click", function () {
+            sidebar.classList.toggle("mobile-open");
+            if (overlay) overlay.classList.toggle("active");
+        });
+    }
+
+    // Close sidebar when clicking the overlay
+    if (overlay && sidebar) {
+        overlay.addEventListener("click", function () {
+            sidebar.classList.remove("mobile-open");
+            overlay.classList.remove("active");
+        });
+    }
 
     // التعامل مع القوائم الفرعية
     const hasSubmenuItems = document.querySelectorAll(".has-submenu");
     hasSubmenuItems.forEach((item) => {
         const link = item.querySelector(".nav-link");
 
-        link.addEventListener("click", function (e) {
-            if (
-                window.innerWidth > 992 ||
-                !sidebar.classList.contains("collapsed")
-            ) {
-                e.preventDefault();
-                item.classList.toggle("active");
-            }
-        });
+        if (link) {
+            link.addEventListener("click", function (e) {
+                if (
+                    window.innerWidth > 992 ||
+                    (sidebar && !sidebar.classList.contains("collapsed"))
+                ) {
+                    e.preventDefault();
+                    item.classList.toggle("active");
+                }
+            });
+        }
     });
 
     // إغلاق السايدبار عند النقر على رابط في الشاشات الصغيرة
@@ -33,9 +51,10 @@ document.addEventListener("DOMContentLoaded", function () {
         link.addEventListener("click", function () {
             if (
                 window.innerWidth <= 992 &&
-                sidebar.classList.contains("mobile-open")
+                sidebar && sidebar.classList.contains("mobile-open")
             ) {
                 sidebar.classList.remove("mobile-open");
+                if (overlay) overlay.classList.remove("active");
             }
         });
     });
@@ -223,9 +242,9 @@ document.addEventListener("DOMContentLoaded", function () {
             
             // Show loading state immediately for responsiveness
             if (this.value.length > 0) {
-                searchNavbar.classList.add('searching');
+                if (searchNavbar) searchNavbar.classList.add('searching');
             } else {
-                searchNavbar.classList.remove('searching');
+                if (searchNavbar) searchNavbar.classList.remove('searching');
             }
 
             searchTimeout = setTimeout(() => {

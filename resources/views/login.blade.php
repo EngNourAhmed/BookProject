@@ -7,6 +7,8 @@
     <title>Login - Book ERA</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -29,43 +31,45 @@
         }
 
         body {
-            background: radial-gradient(circle at top right, #1d3557, var(--navy-dark));
-            height: 100vh;
+            background: var(--navy-dark);
+            background-image: radial-gradient(circle at top right, rgba(13, 30, 54, 0.5) 0%, var(--navy-dark) 40%, #020710 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
-            overflow: hidden;
             position: relative;
+            overflow-x: hidden;
         }
 
         /* Decorative Background Elements */
         body::before, body::after {
             content: '';
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 400px;
             border-radius: 50%;
-            filter: blur(100px);
+            filter: blur(120px);
             z-index: -1;
             opacity: 0.15;
         }
 
         body::before {
-            top: -100px;
-            left: -100px;
+            top: -150px;
+            left: -150px;
             background: var(--accent-yellow);
         }
 
         body::after {
-            bottom: -100px;
-            right: -100px;
+            bottom: -150px;
+            right: -150px;
             background: #4361ee;
         }
 
         .login-container {
             width: 100%;
-            max-width: 440px;
+            max-width: 380px;
             z-index: 10;
         }
 
@@ -74,7 +78,7 @@
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
+            border-radius: 28px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             overflow: hidden;
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -86,7 +90,7 @@
         }
 
         .login-header {
-            padding: 40px 40px 20px;
+            padding: 30px 30px 15px;
             text-align: center;
         }
 
@@ -118,7 +122,7 @@
         }
 
         .login-body {
-            padding: 20px 40px 40px;
+            padding: 15px 30px 35px;
         }
 
         .form-label {
@@ -144,6 +148,16 @@
             color: var(--text-white) !important;
             font-size: 0.95rem !important;
             transition: all 0.3s ease !important;
+        }
+
+        /* Autofill Styling */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 1000px rgba(2, 7, 16, 0.65) inset !important;
+            -webkit-text-fill-color: var(--text-white) !important;
+            transition: background-color 5000s ease-in-out 0s;
         }
 
         .form-control:focus {
@@ -311,6 +325,21 @@
         }
 
         .login-card { animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        @media (max-width: 576px) {
+            body {
+                padding: 16px 10px;
+            }
+            .login-header {
+                padding: 30px 20px 10px;
+            }
+            .login-body {
+                padding: 10px 20px 30px;
+            }
+            .login-card {
+                border-radius: 18px;
+            }
+        }
     </style>
 </head>
 

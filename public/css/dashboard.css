@@ -558,10 +558,69 @@ h1, h2, h3, h4, h5, h6, .fw-bold, .card-title, .modal-title {
         margin-left: 0;
         padding: 1.5rem;
         padding-top: 5rem;
+        width: 100% !important;
     }
 
     .mobile-toggle {
         display: flex;
+    }
+}
+
+/* Sidebar Overlay Backdrop */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(2, 7, 16, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1050;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Responsive Search Navbar */
+@media (max-width: 768px) {
+    .search-navbar {
+        flex-direction: column-reverse;
+        align-items: center;
+        border-radius: var(--radius-lg) !important;
+        padding: 1.25rem;
+        gap: 1.25rem;
+    }
+    .search-bar {
+        width: 100%;
+    }
+    .search-bar form {
+        width: 100%;
+        padding: 0.35rem 0.35rem 0.35rem 0.75rem;
+    }
+    .search-bar .btn-saas-primary {
+        padding: 0.6rem 1.25rem;
+    }
+}
+
+/* Mobile Split-Pane Layout Utilities for Messenger & Resolution Center */
+@media (max-width: 767px) {
+    .messenger-inbox-pane {
+        display: flex !important;
+    }
+    .messenger-chat-pane {
+        display: none !important;
+    }
+    .show-chat .messenger-inbox-pane {
+        display: none !important;
+    }
+    .show-chat .messenger-chat-pane {
+        display: flex !important;
     }
 }
 
@@ -1074,5 +1133,51 @@ h1, h2, h3, h4, h5, h6, .fw-bold, .card-title, .modal-title {
 /* Opacity Utilities */
 .opacity-10 {
     opacity: 0.1 !important;
+}
+
+/* Table Responsiveness Improvements */
+.table-responsive {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+.users-table th, .users-table td {
+    white-space: nowrap !important;
+    vertical-align: middle !important;
+}
+
+.users-table td {
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Clear Floating Hamburger Button on full-height views */
+@media (max-width: 992px) {
+    .report-list-panel, .chat-panel, .context-panel {
+        padding-top: 4.5rem !important;
+    }
+}
+@media (max-width: 767px) {
+    .messenger-inbox-pane, .messenger-chat-pane {
+        padding-top: 4.5rem !important;
+    }
+}
+
+/* Responsive Header Banner */
+@media (max-width: 576px) {
+    .header-banner > div {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 1.25rem !important;
+        padding: 1.25rem !important;
+    }
+    .header-banner > div > div:last-child {
+        align-self: flex-end !important;
+    }
+    .display-6 {
+        font-size: 2rem !important;
+    }
 }
 

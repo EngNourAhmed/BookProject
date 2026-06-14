@@ -113,6 +113,19 @@
             color: rgba(255,255,255,0.8);
             font-weight: 500;
         }
+
+        @media (max-width: 768px) {
+            .card-body {
+                padding: 1.5rem !important;
+            }
+            .article-title {
+                font-size: 1.35rem !important;
+                margin-bottom: 1rem !important;
+            }
+            .category-badge {
+                margin-bottom: 1.25rem !important;
+            }
+        }
     </style>
 </head>
 

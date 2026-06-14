@@ -128,6 +128,32 @@
             font-weight: 800;
             letter-spacing: 0.1em;
         }
+
+        @media (max-width: 768px) {
+            .reading-room {
+                padding: 2rem 1.5rem !important;
+                border-left-width: 5px !important;
+            }
+            .article-title {
+                font-size: 2rem !important;
+                margin-bottom: 1.5rem !important;
+                padding-bottom: 1rem !important;
+            }
+            .article-content {
+                font-size: 1.1rem !important;
+                line-height: 1.7 !important;
+            }
+            .action-bar-light {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 1rem !important;
+            }
+            .action-bar-light > div {
+                flex-wrap: wrap !important;
+                justify-content: space-between !important;
+                width: 100% !important;
+            }
+        }
     </style>
 </head>
 

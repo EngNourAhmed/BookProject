@@ -104,8 +104,8 @@
                             @forelse($articles as $article)
                             <tr class="text-center">
 
-                                <td>{{ $article->title }}</td>
-                                <td>{{ $article->content }}</td>
+                                <td>{{ Str::limit($article->title, 40) }}</td>
+                                <td>{{ Str::limit(strip_tags($article->content), 65) }}</td>
 
 
                                 <td>{{ $article->user->name ?? 'Unknown' }}</td>
